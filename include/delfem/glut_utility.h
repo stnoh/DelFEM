@@ -7,6 +7,13 @@
  *
  */
 
+// quick fix
+#if defined(__APPLE__) && defined(__MACH__)
+#  include <GLUT/glut.h>
+#else
+#  include <GL/glut.h>
+#endif
+
 void RenderBitmapString(float x, float y, void *font,char *string)
 {
   char *c;

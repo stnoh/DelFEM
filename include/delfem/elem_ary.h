@@ -37,6 +37,36 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #include "delfem/objset.h"
 #include "delfem/indexed_array.h"
 
+// quick fix for "abs": https://stackoverflow.com/a/51638822
+#include <cmath>
+#include <type_traits>
+namespace util {
+
+template <class T>
+auto abs(T value) -> std::enable_if_t<std::is_unsigned<T>::value,
+                                      T> { return value; }
+template <class T>
+auto abs(T value) -> std::enable_if_t<std::is_floating_point<T>::value,
+                                      T> { return std::fabs(value); }
+template <class T>
+auto abs(T value) -> std::enable_if_t<std::is_same<T, int>::value,
+                                      T> { return std::abs(value); }
+template <class T>
+auto abs(T value) -> std::enable_if_t<std::is_same<T, long>::value,
+                                      T> { return std::labs(value); }
+template <class T>
+auto abs(T value) -> std::enable_if_t<std::is_same<T, long long>::value,
+                                      T> { return std::llabs(value); }
+template <class T>
+auto abs(T value) -> std::enable_if_t<std::is_signed<T>::value &&
+                                          !std::is_floating_point<T>::value &&
+                                          !std::is_same<T, int>::value &&
+                                          !std::is_same<T, long>::value &&
+                                          !std::is_same<T, long long>::value,
+                                      T> { return std::abs(value); }
+
+} // namespace util
+
 namespace Fem{
 namespace Field{
 
@@ -85,7 +115,7 @@ public:
 		void GetNodes(const unsigned int& ielem, unsigned int* noes ) const {
 			for(unsigned int inoes=0;inoes<m_nnoes;inoes++){ 
 				assert( ielem*npoel+begin+inoes < nelem*npoel );
-				noes[inoes] = abs(pLnods[ielem*npoel+begin+inoes]); 
+				noes[inoes] = util::abs(pLnods[ielem*npoel+begin+inoes]); 
 			}
 		}
 		//! ß“_”Ô†‚ðÝ’è
