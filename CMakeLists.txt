@@ -113,4 +113,21 @@ endmacro()
 ##############################################################################
 # Executables
 ##############################################################################
-add_subdirectory(test_glut_lowlev/solid2d)
+#add_subdirectory(test_glut_lowlev/solid2d) ## commented out due to test_glut/solid2d
+
+add_subdirectory(test_glut/cad_view)
+add_subdirectory(test_glut/cad2d_edit)
+add_subdirectory(test_glut/cad3d)
+add_subdirectory(test_glut/dkt2d)
+add_subdirectory(test_glut/field_evaluate)
+add_subdirectory(test_glut/fluid2d)
+add_subdirectory(test_glut/helmholtz2d)
+add_subdirectory(test_glut/hyper3d)
+add_subdirectory(test_glut/msh_view)
+add_subdirectory(test_glut/rigid)
+add_subdirectory(test_glut/scalar2d)
+add_subdirectory(test_glut/scalar3d)
+add_subdirectory(test_glut/solid2d)
+add_subdirectory(test_glut/solid2d_thermal)
+add_subdirectory(test_glut/solid3d)
+add_subdirectory(test_glut/stvk_rigid)
