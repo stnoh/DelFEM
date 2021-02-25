@@ -54,6 +54,7 @@ file(GLOB_RECURSE sources_msh      "${DELFEM_SOURCE_DIR}/msh/*.cpp")
 file(GLOB_RECURSE sources_rigid    "${DELFEM_SOURCE_DIR}/rigid/*.cpp")
 
 ## exception case
+list(REMOVE_ITEM headers "${DELFEM_HEADER_DIR}/delfem/designer2d_analysis.h")
 list(REMOVE_ITEM headers_cad "${DELFEM_HEADER_DIR}/delfem/cad/contact_target_cad3d.h")
 list(REMOVE_ITEM sources_cad "${DELFEM_SOURCE_DIR}/cad/contact_target_cad3d.cpp")
 
